@@ -1,17 +1,11 @@
 /* 
  Common URLs so that it's easy to update
 */
-var customer_login_url = 'http://localhost:32144/customers/login/'
+var customer_login_url = 'http://localhost/customers/login/'
 
-var customer_url = 'http://localhost:32144/customers/customer/'
+var customer_url = 'http://localhost/customers/customer/'
 
-var cart_url = 'http://localhost:32144/cart/cart/'
-
-var products_url = 'http://localhost:32144/products/products/'
-
-var inventory_url = 'http://localhost:32144/inventory/inventory/'
-
-
+var task_url = 'http://localhost/task'
 
 /*
 common Signout
@@ -260,6 +254,19 @@ function getCartsByCustomerId()
     	e.preventDefault();
       console.log(sessionStorage.products);
       	 var products = JSON.parse(sessionStorage.products);
+		 var description = document.getElementById("description");
+		 var taskid = "task1";
+		 var data = {};
+		 data.taskid = taskid;
+		 data.products = products;
+		 data.description = description;
+		 console.log(data);
+		 axios.post(task_url, data).then(response=>{
+			const result = response.data;
+			console.log('Success', result);
+		 }).catch(error=>console.error());
+
+
 
          //products list as JSON
          console.log(products);
@@ -492,4 +499,3 @@ function updateInventory() {
      })
      .catch(error => console.error(error));
 }
-
